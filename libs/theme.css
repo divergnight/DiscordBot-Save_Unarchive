@@ -1,0 +1,399 @@
+/*Nier Theme*/
+@font-face {
+    font-family: 'sce-ps3_rodin_latinregular';
+    src: url('./font/sce-ps3-rd-i-latin-webfont.woff2') format('woff2'),
+        url('./font/sce-ps3-rd-i-latin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'sce-ps3_rodin_latinregular';
+    src: url('./font/sce-ps3-rd-bi-latin-webfont.woff2') format('woff2'),
+        url('./font/sce-ps3-rd-bi-latin-webfont.woff') format('woff');
+    font-weight: italic;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'sce-ps3_rodin_latinregular';
+    src: url('./font/sce-ps3-rd-b-latin-webfont.woff2') format('woff2'),
+        url('./font/sce-ps3-rd-b-latin-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'sce-ps3_rodin_latinregular';
+    src: url('./font/sce-ps3-rd-r-latin-webfont.woff2') format('woff2'),
+        url('./font/sce-ps3-rd-r-latin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --color-high: rgb(218, 212, 187);
+    --color-low: rgb(87, 84, 74);
+    --color-mid: rgb(151, 147, 129);
+    --color-alert: rgb(205, 102, 77);
+    --color-high-trans: rgba(218, 212, 187, 0.8);
+    --color-low-trans: rgba(87, 84, 74, 0.6);
+    --color-alert-trans: rgba(205, 102, 77, 0.7);
+    --nier-font: sce-ps3_rodin_latinregular;
+}
+body {
+    background: var(--color-high) url("./media/NieR-bg.png")
+    center/cover no-repeat fixed;
+
+    font-family: var(--nier-font), "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+
+    cursor: url(./media/Hack_Normal_Select_v2.cur), default !important;
+
+    overflow: overlay;
+}
+
+html:before{
+    content: "";
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            to right,
+            rgba(78, 75, 66, 0.2),
+            transparent 30%,
+            transparent 80%,
+            rgba(78, 75, 66, 0.4)
+        ),
+        radial-gradient(transparent 50%, rgba(78, 75, 66, 0.4));
+    user-select: none;
+    pointer-events: none;
+    z-index:  -1;
+}
+
+html:after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("./media/Nie-R-Lattice.png");
+    z-index: 10000;
+    opacity: 0.03;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+div [class^=chatlog] span, div [class^=preamble__entry], input {
+  cursor: url("./media/Hack_Text_Select_v2.cur"), default !important;
+}
+
+a, button, label {
+  cursor: url("./media/Hack_Link_Select_v2.cur"), default !important;
+  color: var(--color-alert);
+}
+
+.chatlog__author-name-date{
+    display: inline-block;
+    padding: 4px 5px 4px 6px;
+    position: relative;
+    background: var(--color-high);
+    margin-left: 13px;
+    margin-bottom: 4px;
+    border: none;
+    border-radius: 0;
+    box-shadow: -3px 0 0 var(--color-low), -9px 0 0 var(--color-high), -21px 0 0 var(--color-low), -18px 2px 0 var(--color-mid), 2px 2px 0 var(--color-mid);
+
+}
+
+div .pre--multiline.hljs, div .pre {
+    position: relative;
+    background: var(--color-high);
+    margin-left: 13px;
+    margin-bottom: 6px;
+    border: none;
+    border-radius: 0; /*WWW AVIS*/
+    box-shadow: -3px 0 0 var(--color-low), -9px 0 0 var(--color-high), -21px 0 0 var(--color-low), -18px 4px 0 var(--color-mid), 4px 4px 0 var(--color-mid);
+}
+
+.chatlog__embed-content-container {
+    position: relative;
+    background: var(--color-high);
+    border: none;
+    border-left: 4px solid;
+    border-radius: 0; /*WWW AVIS*/
+    border-color: hsl(237, calc(var(--saturation-factor, 1) * 23%), 50.6%);
+    box-shadow: 4px 4px 0 var(--color-mid);
+}
+
+.chatlog__embed-color-pill{
+    visibility: hidden;
+}
+
+strong{
+    font-family: Arial;
+    font-weight: 700;
+    text-rendering: optimizelegibility;
+    white-space: break-spaces;
+}
+
+[class^=chatlog], [class^=preamble], [class^=postamble], [class~="category-box"], .language-txt, .pre--multiline.hljs, .pre{
+    color : var(--color-low);
+}
+*{
+    text-rendering: optimizeLegibility;
+}
+
+.chatlog__bot-tag{
+    background-color: var(--color-alert);
+    color: var(--color-high);
+    font-size: 10px;
+    padding: 1px 4px;
+}
+
+.preamble>.preamble__entries-container>:first-child{
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 0 var(--color-mid);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.preamble>.preamble__entries-container>:not(*:first-child){
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+
+.preamble__guild-icon{
+    max-height: 50px; 
+    max-width: 50px;
+}
+
+.preamble>.preamble__entries-container> :not(:first-child){
+    font-size: 15px;
+}
+
+.chatlog__message-group, .postamble{
+    border: none;
+}
+
+.chatlog__message{
+    padding-right: 55px;
+}
+
+
+
+.channel-link{
+    display: flex;
+    align-items: center;
+    padding: 6px;
+
+    background: linear-gradient(to right, var(--color-low) 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: bottom right;
+    transition: background .35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.channel-link:hover, .thread-link:hover{
+    text-decoration: none;
+}
+
+.channel-link>svg{
+    flex-shrink: 0;
+    transition: color 0.2s, background-color 0.2s;
+    margin-right: 10px;
+    height: 12px;
+    width: 12px;
+    z-index: 1;
+    background: var(--color-low);
+    transition: background .35s;
+}
+
+.thread-link{
+    display: flex;
+    align-items: center;
+    margin: 2px 10px 2px 0px;
+    padding-left: 5px;
+    height: 32px;
+    background: linear-gradient(to right, var(--color-low) 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: bottom right;
+    transition: background .35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.threads-link{
+    display : flex;
+    margin-left: 20px;
+}
+.threads-link .svg{
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 8px;
+}
+
+.threads-link .svg> *:not(:first-child){
+    position: absolute; 
+    right:0px;
+}
+
+.threads-link>:last-child{
+    padding-left: 10px;
+    padding-right: 6px;
+}
+
+.text-link{
+    display: inline-block;
+    color: var(--color-low);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.thread-link .text-link{
+    width: 177px
+}
+
+[viewBox="0 0 12 11"]{
+    margin-bottom: 3px;
+}
+
+nav>.category-nav>:not([class~="threads-link"]):not([class~="category-box"]){
+    margin: 3px 0px;
+}
+
+.category-nav{
+    display: flex;
+    flex-direction: column;
+}
+.category-nav>:first-child{
+    display: flex;
+    align-items: center;
+}
+
+
+.category-nav:not(:first-child){
+    margin-top: 12px;
+}
+
+.category-text{
+    font-size: 12px;
+    font-weight:  600;
+    color: var(--color-low);
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.preamble-all{position: fixed; height: 100%; width: 238px; font-size: 16px;}
+
+.chatlog-all{margin-left: 260px ; padding-top: 10px; }
+
+.nav-select, nav>div>div:not([class~="category-box"]):not([class~="threads-link"]):hover, nav>div>.threads-link>div:last-child>div:hover{
+    box-shadow: 0 1px var(--color-low), 0 -1px var(--color-low);
+    padding: 1px 0px 1px 0px;
+}
+nav .threads-link .nav-select, nav .threads-link>div:last-child>div:hover{
+    margin: 2px 0px 2px 0px;
+    width: 182px;
+}
+
+.nav-select .channel-link, nav>div>div:not([class~="category-box"]):not([class~="threads-link"]):hover .channel-link, nav>div>.threads-link>div:last-child>div:hover .channel-link{
+    padding-left: 6px;
+    background-position: bottom left;
+}
+.nav-select .thread-link, nav>div>div:not([class~="category-box"]):not([class~="threads-link"]):hover .thread-link, nav>div>.threads-link>div:last-child>div:hover .thread-link{
+    background-position: bottom left;
+    margin: 0px;
+    height: 30px;
+}
+.nav-select span, nav>div>div:not([class~="category-box"]):not([class~="threads-link"]):hover span, nav>div>.threads-link>div:last-child>div:hover span{
+    color: var(--color-high);
+}
+.nav-select .channel-link span, nav>div>div:not([class="category-nav"]):not([class~="threads-link"]):hover .channel-link span{
+    margin: -1px 0px -1px 0px;
+}
+
+.nav-select svg, nav>div>div:not([class~="category-box"]):not([class~="threads-link"]):hover svg, nav>div>.threads-link>div:last-child>div:hover svg{
+    background-color: var(--color-high);
+
+}
+
+.nav-select a{
+    pointer-events: none;
+}
+
+
+.category-nav>:not([class~="category-box"]):not([class="nav-select"]){
+    display: none;
+}
+
+.category-show ~ :not(input):not([class~="threads-link"]){
+    display: block !important;
+}
+
+.category-show ~ .threads-link{
+    display: flex !important;
+}
+
+.category-box>svg{
+    transition: transform .2s ease-out,-webkit-transform .2s ease-out;
+}
+
+.zero-time>svg{
+    transition: none !important;
+}
+
+.category-box:not([class~="category-show"])>svg{
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+
+.preamble{height: 54px; margin-bottom: 20px;}
+nav{height: calc(100% - 80px); overflow: hidden; padding-right: 6px; padding-left: 8px; position: relative ;}
+nav:hover{ overflow-y: overlay; }
+
+nav{
+    display: block !important;
+}
+
+.chatlog__author-avatar {
+   border-radius: 0;
+   box-shadow: 3px 3px 0 var(--color-mid);
+   background: var(--color-high);
+}
+
+a[href^="https://media.discordapp.net/attachments/"], a[href^="https://cdn.discordapp.com/attachments/"]{
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px 10px transparent;
+    border: solid 2px transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 10px 10px var(--color-low);
+    border: solid 2px transparent;
+    border-radius: 20px;
+}
+
+::selection {
+    background-color: var(--color-alert);
+    color: var(--color-high);
+}
+
+transform:translatez(0);
+-webkit-transform:translatez(0);
