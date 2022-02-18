@@ -4,6 +4,7 @@ import os
 from os.path import basename,realpath,isfile,join
 from os import walk,listdir
 from dotenv import load_dotenv
+import commands.watch_thread as wt
 
 class DocBot(commands.Bot):
 	"""
@@ -15,6 +16,7 @@ class DocBot(commands.Bot):
 		self.add_command(status)
 		self.add_command(link)
 		self.add_command(clean)
+		self.add_command(wt.watch_thread)
 
 	async def on_ready(self):
 		print("Le bot est prêt.")
@@ -24,7 +26,8 @@ class DocBot(commands.Bot):
 	#Unarchive thread archived
 	async def on_thread_update(self,before, after):
 		#Unarchive thread archived
-		if after.archived :
+		unarchive_thread = [row[0] for row in wt.get_watch_thread(after.guild.id)]
+		if after.archived and after.id in unarchive_thread:
 			await after.edit(archived=False)
 			print('Thread Update at',after.archive_timestamp)
 		
@@ -35,11 +38,14 @@ class DocBot(commands.Bot):
 		"""
 		for guild in bot.guilds:
 			channels = await guild.fetch_channels()
+
+			unarchive_thread = [row[0] for row in wt.get_watch_thread(guild.id)]
 			for channel in channels:
 				if str(channel.type) == 'text' and channel.members != []:
 					threads = channel.archived_threads()
 					async for th in threads :
-						await th.edit(archived=False)
+						if th.id in unarchive_thread:
+							await th.edit(archived=False)
 
 		print('Thread Unarchive')
 
@@ -89,6 +95,7 @@ async def link(ctx,title="Title",color="64679e",*args):
 	embedVar = discord.Embed(title=title, description="""{}""".format(liste), color=int(str(color),16))
 	await ctx.send(embed=embedVar)
 	await ctx.message.delete()
+
 
 bot = DocBot(PREFIX)
 bot.run(TOKEN)

@@ -1,6 +1,7 @@
 presence.py
 DiscordBotAesir.zip
 ExportDiscord/
+*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
