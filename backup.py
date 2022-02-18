@@ -25,7 +25,7 @@ async def export_all():
     """
 
     #Export all channels from all the guilds
-    os.system("{}/DiscordChatExporter.Cli.dll exportall -t {} -b -o \"{}/%G/%T/%C/%C.html\" {} --include-dm false --dateformat \"dd/MM/yyyy HH:mm:ss\"".format(EXEPATH,TOKEN,EXPORTDIRECTORY,OTHER))
+    os.system("dotnet {}/DiscordChatExporter.Cli.dll exportall -t {} -o \"{}/%G/%T/%C/%C.html\" {} --include-dm false --dateformat \"dd/MM/yyyy HH:mm:ss\"".format(EXEPATH,TOKEN,EXPORTDIRECTORY,OTHER))
 
 
     #Export all active threads from all the guilds
@@ -50,7 +50,7 @@ async def export_all_threads(guild_id):
      #Collect all archived threads from the guild
     channels = await guild.fetch_channels()
     for channel in channels:
-        if str(channel.type) == 'text' and channel.permissions_for(guild.get_member(913527309108150334)).view_channel:      
+        if str(channel.type) == 'text' and channel.members != []:
             threads = channel.archived_threads()
             async for th in threads :
                 await th.edit(archived=False,auto_archive_duration=1440)
@@ -67,7 +67,7 @@ def export_thread(th):
     EXPORTDIRECTORY_L = "{}/{}/{}/{}".format(EXPORTDIRECTORY,th.guild,th.category,th.parent)
 
     #Export one of the guild's threads
-    os.system("{}/DiscordChatExporter.Cli.exe export -t {} -b -c {} -o \"{}/{}.html\" {} --dateformat \"dd/MM/yyyy HH:mm:ss\"".format(EXEPATH,TOKEN,CHANNEL,EXPORTDIRECTORY_L,FILENAME,OTHER))
+    os.system("dotnet {}/DiscordChatExporter.Cli.dll export -t {} -c {} -o \"{}/{}.html\" {} --dateformat \"dd/MM/yyyy HH:mm:ss\"".format(EXEPATH,TOKEN,CHANNEL,EXPORTDIRECTORY_L,FILENAME,OTHER))
 
 
 

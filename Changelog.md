@@ -1,4 +1,4 @@
-### v1.0.0 (18-Feb-2022)
+### v1.0 (18-Feb-2022)
 
 ###### Add features
 - Save all channels and threads in HTML format

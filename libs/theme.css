@@ -146,6 +146,11 @@ strong{
     text-rendering: optimizeLegibility;
 }
 
+.chatlog__message--pinned{
+    background: none;
+}
+
+
 .chatlog__bot-tag{
     background-color: var(--color-alert);
     color: var(--color-high);
