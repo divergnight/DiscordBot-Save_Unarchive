@@ -30,6 +30,13 @@ async def watch_thread(ctx,action="list",*threads):
 		delete_watch_thread(threads)
 		await ctx.send("Thread successfully removed to the list of watched threads.")
 
+	elif action == "watch":
+		unarchive_thread = [row[0] for row in get_watch_thread(guild)]
+		for th in unarchive_thread :
+			if th.archived:
+				await th.edit(archived=False)
+				print('Thread Update at',th.archive_timestamp)
+
 	await ctx.message.delete()
 
 
@@ -38,26 +45,28 @@ async def watch_thread(ctx,action="list",*threads):
 # -- BDD -- #
 
 def create_watch_thread_table():
-	db.exe("""SELECT count(name) FROM sqlite_master WHERE type='table' AND name='watch_thread'""")
+	db.exe("""SELECT count(table_name) FROM information_schema.tables WHERE table_schema LIKE 'public' AND table_type LIKE 'BASE TABLE' AND table_name='watch_thread'""")
+
 	if db.fetch_one()[0]==0:
-		db.exe("""CREATE TABLE IF NOT EXISTS `watch_thread` (
-			`id_thread` int(11) NOT NULL,
-			`id_guild` int(11) NOT NULL,
-			PRIMARY KEY (`id_thread`)
+		db.exe("""CREATE TABLE IF NOT EXISTS watch_thread (
+			id_thread integer NOT NULL,
+			id_guild integer NOT NULL,
+			PRIMARY KEY (id_thread)
 			)""")
 		db.commit()
 
 
 def get_watch_thread(guild):
 	create_watch_thread_table()
-	return db.exe("SELECT id_thread FROM 'watch_thread' WHERE id_guild={}".format(guild))
+	db.exe("SELECT id_thread FROM watch_thread WHERE id_guild={}".format(guild))
+	return db.fetch_many()
 
 def add_watch_thread(threads):
 	create_watch_thread_table()
-	db.exe_many("""INSERT OR IGNORE INTO `watch_thread` (`id_thread`, `id_guild`) VALUES (?, ?)""",threads)
+	db.exe_many("""INSERT OR IGNORE INTO watch_thread (id_thread, id_guild) VALUES (?, ?)""",threads)
 	db.commit()
 
 def delete_watch_thread(threads):
 	create_watch_thread_table()
-	db.exe("""DELETE FROM 'watch_thread' WHERE id_thread IN({})""".format(",".join(threads)))
+	db.exe("""DELETE FROM watch_thread WHERE id_thread IN({})""".format(",".join(threads)))
 	db.commit()
