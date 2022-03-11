@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord
-import commands.db.db as db
+import cmds.db.db as db
 
 # -- Command -- #
 
@@ -33,9 +33,10 @@ async def watch_thread(ctx,action="list",*threads):
 	elif action == "watch":
 		unarchive_thread = [row[0] for row in get_watch_thread(guild)]
 		for th in unarchive_thread :
-			if th.archived:
+			thread = await ctx.guild.fetch_channel(th)
+			if thread.archived:
 				await th.edit(archived=False)
-				print('Thread Update at',th.archive_timestamp)
+				print('Thread Update at',thread.archive_timestamp)
 
 	await ctx.message.delete()
 
@@ -49,21 +50,20 @@ def create_watch_thread_table():
 
 	if db.fetch_one()[0]==0:
 		db.exe("""CREATE TABLE IF NOT EXISTS watch_thread (
-			id_thread integer NOT NULL,
-			id_guild integer NOT NULL,
-			PRIMARY KEY (id_thread)
+			id_thread BIGINT PRIMARY KEY,
+			id_guild BIGINT NOT NULL
 			)""")
 		db.commit()
 
 
 def get_watch_thread(guild):
 	create_watch_thread_table()
-	db.exe("SELECT id_thread FROM watch_thread WHERE id_guild={}".format(guild))
-	return db.fetch_many()
+	db.exe("SELECT id_thread FROM watch_thread WHERE id_guild = {}".format(guild))
+	return db.fetch_all()
 
 def add_watch_thread(threads):
 	create_watch_thread_table()
-	db.exe_many("""INSERT OR IGNORE INTO watch_thread (id_thread, id_guild) VALUES (?, ?)""",threads)
+	db.exe_many("""INSERT INTO watch_thread (id_thread, id_guild) VALUES (%s, %s) ON CONFLICT DO NOTHING""",threads)
 	db.commit()
 
 def delete_watch_thread(threads):

@@ -4,7 +4,7 @@ import os
 from os.path import basename,realpath,isfile,join
 from os import walk,listdir
 from dotenv import load_dotenv
-import commands.watch_thread as wt
+import cmds.watch_thread as wt
 
 class DocBot(commands.Bot):
 	"""
@@ -20,7 +20,8 @@ class DocBot(commands.Bot):
 
 	async def on_ready(self):
 		print("Le bot est prêt.")
-		self.unarchive_thread.start()
+		if not self.unarchive_thread.is_running():
+			self.unarchive_thread.start()
 
 
 	#Unarchive thread archived
