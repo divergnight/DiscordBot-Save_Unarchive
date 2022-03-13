@@ -185,12 +185,12 @@ def add_theme(html,repertoire,filename):
     #Add Theme
     libs_path = realpath("./libs/")
     index = html.find("""</style>""")+8
-    html = html[:index] + '<link rel="stylesheet" href="{}/theme.css">'.format(libs_path) + html[index:]
+    html = html[:index] + '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/theme-online.css">'.format(libs_path) + html[index:]
     html = html[:index-8] + """nav{display:none;}""" + html[index-8:]
     index = html.find("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">""")
-    html = html[:index] + '<link rel="stylesheet" href="{}/highlight/styles/atom-one-light.min.css">'.format(libs_path) + html[index+119:]
+    html = html[:index] + '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/styles/atom-one-light.min.css">'.format(libs_path) + html[index+119:]
     index = html.find("""<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>""")
-    html = html[:index] + '<script src="{}/highlight/highlight.min.js"></script>'.format(libs_path) + html[index+99:]
+    html = html[:index] + '<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build/highlight.min.js"></script>'.format(libs_path) + html[index+99:]
 
     #Create chatlog section
     index = html.find("""<div class="chatlog">""")

@@ -1,32 +1,32 @@
 /*Nier Theme*/
 @font-face {
     font-family: 'sce-ps3_rodin_latinregular';
-    src: url('./font/sce-ps3-rd-i-latin-webfont.woff2') format('woff2'),
-        url('./font/sce-ps3-rd-i-latin-webfont.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-i-latin-webfont.woff2') format('woff2'), 
+        url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-b-latin-webfont.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'sce-ps3_rodin_latinregular';
-    src: url('./font/sce-ps3-rd-bi-latin-webfont.woff2') format('woff2'),
-        url('./font/sce-ps3-rd-bi-latin-webfont.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-bi-latin-webfont.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-bi-latin-webfont.woff') format('woff');
     font-weight: italic;
     font-style: bold;
 }
 
 @font-face {
     font-family: 'sce-ps3_rodin_latinregular';
-    src: url('./font/sce-ps3-rd-b-latin-webfont.woff2') format('woff2'),
-        url('./font/sce-ps3-rd-b-latin-webfont.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-b-latin-webfont.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-b-latin-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'sce-ps3_rodin_latinregular';
-    src: url('./font/sce-ps3-rd-r-latin-webfont.woff2') format('woff2'),
-        url('./font/sce-ps3-rd-r-latin-webfont.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-r-latin-webfont.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/font/sce-ps3-rd-r-latin-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -42,12 +42,12 @@
     --nier-font: sce-ps3_rodin_latinregular;
 }
 body {
-    background: var(--color-high) url("./media/NieR-bg.png")
+    background: var(--color-high) url("https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/media/NieR-bg.png")
     center/cover no-repeat fixed;
 
     font-family: var(--nier-font), "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 
-    cursor: url(./media/Hack_Normal_Select_v2.cur), default !important;
+    cursor: url("https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/media/Hack_Normal_Select_v2.cur"), default !important;
 
     overflow: overlay;
 }
@@ -78,7 +78,7 @@ html:after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("./media/Nie-R-Lattice.png");
+    background: url("https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/media/Nie-R-Lattice.png");
     z-index: 10000;
     opacity: 0.03;
     -webkit-user-select: none;
@@ -87,11 +87,11 @@ html:after {
 }
 
 div [class^=chatlog] span, div [class^=preamble__entry], input {
-  cursor: url("./media/Hack_Text_Select_v2.cur"), default !important;
+  cursor: url("https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/media/Hack_Text_Select_v2.cur"), default !important;
 }
 
 a, button, label {
-  cursor: url("./media/Hack_Link_Select_v2.cur"), default !important;
+  cursor: url("https://cdn.jsdelivr.net/gh/divergnight/DiscordBotAesir@master/libs/media/Hack_Link_Select_v2.cur"), default !important;
   color: var(--color-alert);
 }
 
