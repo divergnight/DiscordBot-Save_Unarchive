@@ -11,8 +11,8 @@ class DocBot(commands.Bot):
 		There is a bot class for run bot in discord
 	"""
 
-	def __init__(self,prefix):
-		super().__init__(command_prefix=prefix)
+	def __init__(self,prefix,intents):
+		super().__init__(command_prefix=prefix, intents=intents)
 		self.add_command(status)
 		self.add_command(link)
 		self.add_command(clean)
@@ -23,7 +23,6 @@ class DocBot(commands.Bot):
 		if not self.unarchive_thread.is_running():
 			self.unarchive_thread.start()
 
-
 	#Unarchive thread archived
 	async def on_thread_update(self,before, after):
 		#Unarchive thread archived
@@ -31,6 +30,19 @@ class DocBot(commands.Bot):
 		if after.archived and after.id in unarchive_thread:
 			await after.edit(archived=False)
 			print('Thread Update at',after.archive_timestamp)
+
+	# Auto add role and send welcome message
+	async def on_member_join(self, member):
+		guild = await bot.fetch_guild(788443757636223016)
+		user_role = guild.get_role(915727796825890836)
+		while True:
+			if not member.pending: break
+			await guild.fetch_member(member.id)
+		await member.add_roles(user_role)
+		channel = await guild.fetch_channel(915706188186935316)
+		await channel.send(f"Cher {member.name},\n\nen ce lieu qu'est {guild.name},\n\nje vous prie de bien vouloir croire en l'assurance de mes respectueuses et honorables salutations.")
+		
+
 		
 	@tasks.loop(hours=12.0)
 	async def unarchive_thread(self):
@@ -98,5 +110,5 @@ async def link(ctx,title="Title",color="64679e",*args):
 	await ctx.message.delete()
 
 
-bot = DocBot(PREFIX)
+bot = DocBot(PREFIX,discord.Intents().all())
 bot.run(TOKEN)
